@@ -120,3 +120,128 @@ Response:
 ```md
 HTTP/1.1 204 No Content
 ```
+
+### List items
+
+List items represent Auction items stored on my DB. Commands for testing DB routes are
+
+#### POST /items
+
+```sh
+curl --include --request POST http://localhost:4741/items \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer ${TOKEN}" \
+  --data '{
+    "items": {
+      "name": "'"${NAME}"'",
+      "desc": "'"${DESC}"'",
+      "price": "'"${PRICE}"'",
+    }
+  }'
+```
+
+```sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa NAME="Mystery Box" DESC="What's inside? Who knows? Gimme your money!" PRICE="$20,000" scripts/items/create.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 201 Created
+Content-Type: application/json; charset=utf-8
+
+{
+  "items": {
+    "_id": "1"
+    "name": "Mystery Box",
+    "desc": "What's inside? Who knows? Gimme your money!",
+    "price": "$20,000"
+  }
+}
+```
+
+#### GET /items
+
+Request:
+
+```sh
+curl --include --request GET http://localhost:4741/items/${ID} \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer 333desd82dd12rf2eh" \
+```
+
+```sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 sh scripts/items/show.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+  "items": {
+    "_id": "1"
+    "name": "Mystery Box",
+    "desc": "What's inside? Who knows? Gimme your money!",
+    "price": "$20,000"
+  }
+}
+```
+
+#### PATCH /items/:id
+
+Request:
+
+```sh
+curl --include --request PATCH http://localhost:4741/items/${ID} \
+  --header "Authorization: Bearer $TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "items": {
+      "name": "Bungee Cord",
+      "desc": "Elastic bungee Cord",
+      "price": "$15.24",
+
+    }
+  }'
+```
+
+```sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 NAME="Bungee Cord" DESC="Elastic bungee Cord" PRICE="$15.24" scripts/items/update.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 202 Accepted
+
+{
+  "items": {
+    "n": 1,
+    "nModified":1,
+    "ok":1
+  }
+}
+
+```
+
+#### DELETE /items/
+
+Request:
+
+```sh
+curl --include --request DELETE http://localhost:4741/items/${ID} \
+  --header "Authorization: Bearer $TOKEN"
+```
+
+```sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 scripts/items/destroy.sh
+```
+
+Response:
+
+```md
+HTTP/1.1 204 No Content
+```
