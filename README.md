@@ -141,7 +141,7 @@ curl --include --request POST http://localhost:4741/items \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa NAME="Mystery Box" DESC="What's inside? Who knows? Gimme your money!" PRICE="$20,000" scripts/items/create.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa NAME="Mystery Box" DESC="What's inside? Who knows? Gimme your money!" PRICE="\$20,000" scripts/items/create.sh
 ```
 
 Response:
@@ -209,7 +209,7 @@ curl --include --request PATCH http://localhost:4741/items/${ID} \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 NAME="Bungee Cord" DESC="Elastic bungee Cord" PRICE="$15.24" scripts/items/update.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 NAME="Bungee Cord" DESC="Elastic bungee Cord" PRICE="\$15.24" scripts/items/update.sh
 ```
 
 Response:

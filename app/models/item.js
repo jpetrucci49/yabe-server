@@ -13,7 +13,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  experation_date: {
+  expiration_date: {
     type: Date,
     default: Date.now
   },
