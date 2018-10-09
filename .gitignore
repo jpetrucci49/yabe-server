@@ -111,7 +111,7 @@ _SpecRunner.html
 *.svg
 *.ttf
 *.eot
-public/
+# public/
 
 ### Ruby ###
 *.gem

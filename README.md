@@ -1,4 +1,33 @@
 
+# Yabe Auctions Express Api
+
+Auction Api back end database for Yabe Browser.
+
+Technologies used in this project include Mongodb, Express, bcrypt, body-parser, Mongoose, passport and Heroku
+
+This API recieves requests from cross-origin clients and responds with JSON snippets of User created Auction list items.
+
+# Yabe Browser Repo:
+
+https://github.com/jpetrucci49/yabe-browser
+
+## Live Sites:
+
+https://TBD \
+https://TBD
+
+### Unsolved Issues:
+
+Still not tracking total bids, or img_src reference.
+
+## ERD:
+
+![ERD v1 & 2](./public/erd.jpg)
+
+## API
+
+Scripts are included in [`scripts`](scripts) to test built-in actions.
+
 ### Authentication
 
 | Verb   | URI Pattern            | Controller#Action |
@@ -25,7 +54,7 @@ curl --include --request POST http://localhost:4741/sign-up \
 ```
 
 ```sh
-scripts/sign-up.sh
+sh scripts/sign-up.sh
 ```
 
 Response:
@@ -58,7 +87,7 @@ curl --include --request POST http://localhost:4741/sign-in \
 ```
 
 ```sh
-scripts/sign-in.sh
+sh scripts/sign-in.sh
 ```
 
 Response:
@@ -93,7 +122,7 @@ curl --include --request PATCH http://localhost:4741/change-password/ \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/change-password.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa sh scripts/change-password.sh
 ```
 
 Response:
@@ -112,7 +141,7 @@ curl --include --request DELETE http://localhost:4741/sign-out/ \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/sign-out.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa sh scripts/sign-out.sh
 ```
 
 Response:
@@ -132,7 +161,7 @@ curl --include --request POST http://localhost:4741/items \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "items": {
+    "item": {
       "name": "'"${NAME}"'",
       "desc": "'"${DESC}"'",
       "price": "'"${PRICE}"'",
@@ -141,7 +170,7 @@ curl --include --request POST http://localhost:4741/items \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa NAME="Mystery Box" DESC="What's inside? Who knows? Gimme your money!" PRICE="\$20,000" scripts/items/create.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa NAME="Mystery Box" DESC="What's inside? Who knows? Gimme your money!" PRICE="\$20,000" sh scripts/items/create.sh
 ```
 
 Response:
@@ -151,7 +180,7 @@ HTTP/1.1 201 Created
 Content-Type: application/json; charset=utf-8
 
 {
-  "items": {
+  "item": {
     "_id": "1"
     "name": "Mystery Box",
     "desc": "What's inside? Who knows? Gimme your money!",
@@ -181,7 +210,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 
 {
-  "items": {
+  "item": {
     "_id": "1"
     "name": "Mystery Box",
     "desc": "What's inside? Who knows? Gimme your money!",
@@ -199,7 +228,7 @@ curl --include --request PATCH http://localhost:4741/items/${ID} \
   --header "Authorization: Bearer $TOKEN" \
   --header "Content-Type: application/json" \
   --data '{
-    "items": {
+    "item": {
       "name": "Bungee Cord",
       "desc": "Elastic bungee Cord",
       "price": "$15.24",
@@ -209,7 +238,7 @@ curl --include --request PATCH http://localhost:4741/items/${ID} \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 NAME="Bungee Cord" DESC="Elastic bungee Cord" PRICE="\$15.24" scripts/items/update.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 NAME="Bungee Cord" DESC="Elastic bungee Cord" PRICE="\$15.24" sh scripts/items/update.sh
 ```
 
 Response:
@@ -218,7 +247,7 @@ Response:
 HTTP/1.1 202 Accepted
 
 {
-  "items": {
+  "item": {
     "n": 1,
     "nModified":1,
     "ok":1
@@ -237,7 +266,7 @@ curl --include --request DELETE http://localhost:4741/items/${ID} \
 ```
 
 ```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 scripts/items/destroy.sh
+TOKEN=33ad6372f795694b333ec5f329ebeaaa ID=1 sh scripts/items/destroy.sh
 ```
 
 Response:
