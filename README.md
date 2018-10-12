@@ -13,12 +13,13 @@ https://github.com/jpetrucci49/yabe-browser
 
 ## Live Sites:
 
-https://TBD \
-https://TBD
+Browser - https://jpetrucci49.github.io/yabe-browser \
+Server - https://yabe-server.herokuapp.com
 
 ### Unsolved Issues:
 
-Still not tracking total bids, or img_src reference.
+Still not tracking total bids, or img_src reference. \
+No winner tracking yet implemented.
 
 ## ERD:
 
