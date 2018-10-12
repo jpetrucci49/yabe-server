@@ -21,6 +21,11 @@ Server - https://yabe-server.herokuapp.com
 Still not tracking total bids, or img_src reference. \
 No winner tracking yet implemented.
 
+## Set Up and Installation
+
+To run the back end API for this app, clone down this repo, navigate into your directory in console and run npm install to install dependencies.
+Use npm start to generate a local server and use crud tests listed below, and scripts found in ./scripts. ./scripts/auth/sign-up.sh to create an account. ./scripts/auth/sign-in.sh to get a user token to use with ./script/items CRUD requests. Also clone down the linked browser repo, and check readme for installation for functionality.
+
 ## ERD:
 
 ![ERD v1 & 2](./public/erd.jpg)
