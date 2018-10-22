@@ -50,7 +50,7 @@ router.get('/items/:id', requireToken, (req, res) => {
   // req.params.id will be set based on the `:id` in the route
   Item.findById(req.params.id)
     .then(handle404)
-    // if `findById` is succesful, respond with 200 and "item" JSON
+    // if `findById` is succesful, respond with 200 and 'item' JSON
     .then(item => res.status(200).json({ item: item.toObject() }))
     // if an error occurs, pass it to the handler
     .catch(err => handle(err, res))
@@ -61,9 +61,8 @@ router.get('/items/:id', requireToken, (req, res) => {
 router.post('/items', requireToken, (req, res) => {
   // set owner of new item to be current user
   req.body.item.owner = req.user.id
-
   Item.create(req.body.item)
-    // respond to succesful `create` with status 201 and JSON of new "item"
+    // respond to succesful `create` with status 201 and JSON of new 'item'
     .then(item => {
       res.status(201).json({ item: item.toObject() })
     })
@@ -79,7 +78,6 @@ router.patch('/items/:id', requireToken, (req, res) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
   delete req.body.item.owner
-
   Item.findById(req.params.id)
     .then(handle404)
     .then(item => {

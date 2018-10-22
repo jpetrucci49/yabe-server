@@ -29,7 +29,6 @@ if (process.env.TESTENV) {
 
 // require configured passport authentication middleware
 const auth = require('./lib/auth')
-
 // establish database connection
 mongoose.Promise = global.Promise
 mongoose.connect(db, {
@@ -45,6 +44,26 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:7165' }))
 
 // define port for API to run on
 const port = process.env.PORT || 4741
+
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+// Console log when a user connects
+io.on('connection', (client) => {
+  console.log('User connected')
+  client.on('disconnect', () => {
+    console.log('user disconnected')
+  })
+  client.on('auctions-indexed', (res) => {
+    console.log(res)
+  })
+  client.on('error', function (err) {
+    console.log('received error from client:', client.id)
+    console.log(err)
+  })
+  // socket.on('SEND_BID', function (data) {
+  //   io.emit('RECEIVE_BID', data)
+  // })
+})
 
 // this middleware makes it so the client can use the Rails convention
 // of `Authorization: Token token=<token>` OR the Express convention of
@@ -75,7 +94,8 @@ app.use(userRoutes)
 app.use(itemRoutes)
 
 // run API on designated port (4741 in this case)
-app.listen(port, () => {
+app.listen(port, (err) => {
+  if (err) throw err
   console.log('listening on port ' + port)
 })
 
