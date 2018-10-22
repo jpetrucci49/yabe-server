@@ -53,8 +53,8 @@ io.on('connection', (client) => {
   client.on('disconnect', () => {
     console.log('user disconnected')
   })
-  client.on('auctions-indexed', (res) => {
-    console.log(res)
+  client.on('bid-placed', (res) => {
+    io.emit('bid-placed', res)
   })
   client.on('error', function (err) {
     console.log('received error from client:', client.id)
@@ -94,7 +94,7 @@ app.use(userRoutes)
 app.use(itemRoutes)
 
 // run API on designated port (4741 in this case)
-app.listen(port, (err) => {
+server.listen(port, (err) => {
   if (err) throw err
   console.log('listening on port ' + port)
 })
